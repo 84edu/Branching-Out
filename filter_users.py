@@ -32,6 +32,16 @@ def filter_users_by_email(users, email):
     print_filtered_results(filtered)
 
 
+def get_valid_filter_option():
+    """Keep asking the user until a valid option is provided."""
+    supported = ["name", "age", "email"]
+    while True:
+        choice = input(f"Choose filter ({'/'.join(supported)}): ").strip().lower()
+        if choice in supported:
+            return choice
+        print("Filtering by that option is not yet supported! Try again.")
+
+
 def run_filter_interface():
     # 1. loading the data
     users = load_users()
@@ -39,7 +49,7 @@ def run_filter_interface():
         return
 
     # 2. Filter Option
-    filter_option = input("What would you like to filter by? (Currently, only 'name', 'age' and 'email' are supported): ").strip().lower()
+    filter_option = get_valid_filter_option()
 
     # 3. Execute the logic
     if filter_option == "name":
